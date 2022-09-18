@@ -2,6 +2,7 @@ import * as trpcExpress from "@trpc/server/adapters/express";
 import express from "express";
 import { appRouter } from "./trpc/routers/index";
 import { createContext } from "./context";
+import { Headers } from "./middleware/Headers";
 import config from "./config/index";
 
 const app = express();
@@ -9,6 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(Headers);
 app.use(
   "/trpc",
   trpcExpress.createExpressMiddleware({
