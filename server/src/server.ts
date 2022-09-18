@@ -4,6 +4,7 @@ import { appRouter } from "./trpc/routers/index";
 import { createContext } from "./context";
 import { Headers } from "./middleware/Headers";
 import config from "./config/index";
+import Logger from "./middleware/Logger";
 
 const app = express();
 
@@ -11,6 +12,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(Headers);
+app.use(Logger);
+
 app.use(
   "/trpc",
   trpcExpress.createExpressMiddleware({
